@@ -10,7 +10,14 @@ if "__main__" in sys.modules and hasattr(sys.modules["__main__"], "extract_file"
 else:
     from app import extract_file
 
-from agents import ScopeDeliverableAgent, RiskForecastingAgent, BlockerActionItemAgent
+from agents import (
+    ScopeDeliverableAgent,
+    RiskForecastingAgent,
+    BlockerActionItemAgent,
+    DocumentationGenerationAgent,
+    ProjectHealthScorer,
+    ConversationalProjectIntelligenceAssistant,
+)
 
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -72,6 +79,9 @@ def run_validation():
     scope_agent = ScopeDeliverableAgent()
     risk_agent = RiskForecastingAgent()
     blocker_agent = BlockerActionItemAgent()
+    doc_gen_agent = DocumentationGenerationAgent()
+    health_scorer = ProjectHealthScorer()
+    conversational_assistant = ConversationalProjectIntelligenceAssistant()
 
     # 2. Test Scope and Deliverable Extraction Agent
     print("\n2. Testing Scope & Deliverable Extraction Agent:")
@@ -108,6 +118,22 @@ def run_validation():
     assert len(blocker_res["blockers"]) > 0, "Blocker agent failed to extract blockers"
     assert len(blocker_res["decisions"]) > 0, "Blocker agent failed to extract pending decisions"
     assert len(blocker_res["action_items"]) > 0, "Blocker agent failed to extract action items"
+
+    # 5. Test Documentation Generation Agent
+    print("\n5. Testing Documentation Generation Agent:")
+    doc_res = doc_gen_agent.analyze(all_records)
+    print(f"  [PASS] User Stories Extracted: {len(doc_res['user_stories'])}")
+    print(f"  [PASS] Risk Register Entries Extracted: {len(doc_res['risk_register'])}")
+    print(f"  [PASS] Action Item List Formatted: {len(doc_res['action_items'])}")
+    assert len(doc_res["user_stories"]) > 0, "DocGen agent failed to generate user stories"
+    assert len(doc_res["risk_register"]) > 0, "DocGen agent failed to generate risk register"
+    assert len(doc_res["action_items"]) > 0, "DocGen agent failed to generate action item list"
+
+    # 6. Test Project Health Scoring Module
+    print("\n6. Testing Project Health Scoring Module:")
+    health_data = health_scorer.calculate_health_score(all_records, scope_res, risk_res, blocker_res)
+    print(f"  [PASS] Overall Health Score: {health_data['overall_score']}/100 ({health_data['health_status']})")
+    assert 0 <= health_data["overall_score"] <= 100, "Invalid overall health score"
 
     print("\n" + "=" * 60)
     print("=== ALL AGENT VALIDATION TESTS PASSED SUCCESSFULLY! ===")
