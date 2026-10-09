@@ -1,4 +1,4 @@
-"""Milestone 4 end-to-end tests: document types, incremental KB, agents, conversational RAG."""
+
 import os
 import sys
 from pathlib import Path
