@@ -134,5 +134,30 @@ Location: Conference Room B & Virtual
             f.write(pdf_content)
         print(f"Created PDF sample with fallback raw stream: {pdf_path}")
 
+    progress = """=== Sprint Progress Update — 2026-10-05 ===
+Date: 2026-10-05
+Type: Incremental meeting notes / progress update
+
+1. Progress:
+- Milestone Phase 2 ingestion pipeline is in progress.
+- Goal: Close remaining Milestone 4 dashboard and documentation items before the final demonstration.
+
+2. New Risks:
+- Schedule slippage on Milestone 4 documentation due to late vendor API keys. Behind schedule.
+- Resource shortage: QA team is understaffed for multi-format regression testing.
+
+3. New Blocker:
+- Blocker: Staging GPU instance shortage delayed model evaluation. Status: Unresolved. Severity: Critical.
+- Waiting for vendor authentication API rate-limit upgrade. This is a prerequisite for ingestion load tests.
+
+4. Assigned Action Items:
+- Action Item: Publish weekly risk register snapshot. Assigned to: Emily Davis. Priority: High. Due Date: 2026-10-08. Status: Open.
+- Action Item: Re-run PDF, DOCX, TXT, and CSV validation suite. Assigned to: Alex Rivera. Priority: High. Due Date: 2026-10-07. Status: In Progress.
+"""
+    progress_path = os.path.join("sample_data", "progress_update.txt")
+    with open(progress_path, "w", encoding="utf-8") as f:
+        f.write(progress)
+    print(f"Created incremental update sample: {progress_path}")
+
 if __name__ == "__main__":
     create_samples()

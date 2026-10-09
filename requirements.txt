@@ -3,3 +3,4 @@ pypdf
 python-docx
 pandas
 scikit-learn
+plotly
