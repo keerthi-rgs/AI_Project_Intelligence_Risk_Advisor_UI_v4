@@ -2,14 +2,6 @@
 
 Streamlit prototype for grounded project intelligence: ingest PDF/DOCX/TXT/CSV files, extract scope/risks/blockers, score health, and answer questions with source citations.
 
-## Milestone 4 (Weeks 7–8)
-
-1. **Project Insights and Risk Summary Dashboard** — health score, extracted risks, action items, and scope summary in one visual layout (`Dashboard`).
-2. **Incremental document upload** — add meeting notes or progress updates; the knowledge base and RAG index update automatically (`Documents`).
-3. **End-to-end testing** — multi-format ingestion, agent outputs, conversational workflows.
-4. **Technical documentation, project report, and demonstration** — this README plus `PROJECT_REPORT.md`.
-
-Earlier milestones (ingestion, RAG, multi-agent extraction, conversational assistant) remain available in the sidebar.
 
 ## Run
 
